@@ -2,7 +2,6 @@ import DiscordJS, { Intents, Message } from 'discord.js'
 import dotenv from 'dotenv'
 dotenv.config()
 
-
 const client = new DiscordJS.Client({
  intents: [
 Intents.FLAGS.GUILDS,
@@ -15,7 +14,7 @@ client.on('ready', () => {
     //guild
     //global
 
-    const guildId = '769242017677967370'
+    const guildId = '965400641994358814'
   const guild = client.guilds.cache.get(guildId)
   let commands
 
@@ -39,7 +38,18 @@ client.on('messageCreate', (message) => {
     }
 })
 
+client.on ('interactionCreate', async (interaction) => {
+if (!interaction.isCommand()) {
+    return
+}
 
+const {commandName, options} = interaction
 
+if (commandName === 'ping') {
+    interaction.reply({
+        content : 'pong',
+        ephemeral: true,
+})
+}
+})
 client.login(process.env.TOKEN)
-
